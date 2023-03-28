@@ -9,7 +9,7 @@ lower_threshold = np.array([40, 50, 50])
 upper_threshold = np.array([80, 255, 255])
 
 mask = cv2.inRange(hsv_image, lower_threshold, upper_threshold)
-cv2.imshow('mask', mask)
+# cv2.imshow('mask', mask)
 
 contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 largest_contour = max(contours, key=cv2.contourArea)
@@ -23,7 +23,8 @@ cv2.imshow('Outline',outline)
 cv2.imshow('Output Window', result)
 # Display the resulting image
 # cv2.imshow('Green Object', green_img)
-
+cv2.imwrite('Output_contour.jpg', outline)
+cv2.imwrite('Output_result.jpg', result)
 # Wait for a key press
 cv2.waitKey(0)
 
