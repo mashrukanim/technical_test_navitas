@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 #Reading, resizing and changing the image format to HSV
-img = cv2.imread('1.jpg')
+img = cv2.imread('input.jpg')
 img = cv2.resize(img, (960,540))
 hsv_image = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -39,11 +39,11 @@ for coords in largest_contour:
 b_box = img.copy()
 b_box = cv2.rectangle(b_box, (xmin, ymin), (xmax, ymax), (0,0,255), 2)
 
-#Drawing the outline of the laptop screen
-outline = cv2.drawContours(img, [largest_contour], 0, (0,0,255), 2)
-
 #Extracting the green screen portion using the new mask
 result = cv2.bitwise_and(img, img, mask=largest_contour_mask)
+
+#Drawing the outline of the laptop screen
+outline = cv2.drawContours(img, [largest_contour], 0, (0,0,255), 2)
 
 #Displaying the results
 cv2.imshow('bbox', b_box)
